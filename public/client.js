@@ -29,6 +29,7 @@ var recipeTemplate = (
 
 
 var serverBase = '//localhost:8080/';
+
 var RECIPES_URL = serverBase + 'recipes';
 var SHOPPING_LIST_URL = serverBase + 'shopping-list';
 

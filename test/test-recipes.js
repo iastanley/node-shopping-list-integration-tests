@@ -53,7 +53,24 @@ describe('Recipes', function() {
 
   //normal case for put request
   it('should update item on PUT', function() {
-
+    const updateData = {
+      name: 'updateName',
+      ingredients: ['ingredient1', 'ingredient2', 'ingredient3']
+    };
+    return chai.request(app)
+      .get('/recipes')
+      .then(res => {
+        updateData.id = res.body[0].id;
+        return chai.request(app)
+          .put(`/recipes/${updateData.id}`)
+          .send(updateData);
+      })
+      .then(res => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.deep.equal(updateData);
+      });
   }); //end of PUT test
 
   //normal case for delete request

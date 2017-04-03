@@ -75,6 +75,14 @@ describe('Recipes', function() {
 
   //normal case for delete request
   it('should detele item on DELETE', function() {
-
+    return chai.request(app)
+      .get('/recipes')
+      .then(res => {
+        return chai.request(app)
+          .delete(`/recipes/${res.body[0].id}`);
+      })
+      .then(res => {
+        res.should.have.status(204);
+      });
   }); //end of DELETE test
 }); //end of describe block
